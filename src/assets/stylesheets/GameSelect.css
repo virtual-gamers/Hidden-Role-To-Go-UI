@@ -1,0 +1,13 @@
+.GameSelect {
+  margin: 2vh;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.GameSelectButtons {
+  margin: 1vh;
+  text-align: center;
+}
+
