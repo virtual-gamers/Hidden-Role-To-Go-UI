@@ -1,13 +1,13 @@
-.GameSelect {
-  margin: 2vh;
+.vertical-select {
+  margin: auto 0rem;
   display: inline-flex;
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
 }
 
-.GameSelectButtons {
-  margin: 1vh;
+.vertical-select-buttons {
+  margin: 0.5rem;
   text-align: center;
 }
 

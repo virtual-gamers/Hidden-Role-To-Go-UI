@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import SupportedGames from './helpers/SupportedGames';
-import '../../assets/stylesheets/GameSelect.css';
+import '../../assets/stylesheets/select.css';
 import Avalon from './Avalon/Avalon';
 
 import { setGame } from '../actions';
@@ -17,11 +17,11 @@ class GameSelect extends Component {
         return (<Avalon />);
       default:
         return (
-          <div className="GameSelect">
+          <div className="vertical-select">
             Something went wrong?
             <button
               type="button"
-              className="btn btn-lg btn-outline-dark GameSelectButtons"
+              className="btn btn-lg btn-outline-dark vertical-select-buttons"
               onClick={() => setSelectedGame(undefined)}
             >
               Return
@@ -37,7 +37,7 @@ class GameSelect extends Component {
       <button
         key={`${game}`}
         type="button"
-        className="btn btn-lg btn-outline-dark GameSelectButtons"
+        className="btn btn-lg btn-outline-dark vertical-select-buttons"
         onClick={() => setSelectedGame(game)}
       >
           {SupportedGames[game]}
@@ -53,7 +53,7 @@ class GameSelect extends Component {
       const gameButtons = supportedGames.map(game => this.mapGameToButton(game));
 
       return (
-        <div className="GameSelect">
+        <div className="vertical-select">
           <h3>Select a game:</h3>
           {gameButtons}
         </div>

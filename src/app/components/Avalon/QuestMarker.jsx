@@ -24,8 +24,8 @@ function QuestMarker(props) {
   } = props;
 
   return (
-    <div className="QuestMarker" id={`QuestMarker-${id}`}>
-      <img src={getQuestImg(questState)} className="QuestMarkerImage" alt="quest" />
+    <div className="questmarker" id={`QuestMarker-${id}`}>
+      <img src={getQuestImg(questState)} className="questmarker-image" alt="quest marker" />
       {/* <div>{`Quest ${id}`}</div> */}
     </div>
   );

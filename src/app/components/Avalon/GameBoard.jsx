@@ -8,7 +8,7 @@ const QUESTS = 5;
 const VOTE_TRACKER = 5;
 
 class GameBoard extends Component {
-  createQuests = () => {
+  createQuestTrackerBoard = () => {
     let questMarkers = [];
     let dummyState = ["PASSED", "FAILED", 'FAILED', '', '']
 
@@ -44,11 +44,11 @@ class GameBoard extends Component {
 
   render() {
     return (
-      <div className="GameBoard">
-        <div className="GameBoard-Quests">
-          {this.createQuests()}
+      <div className="gameboard">
+        <div className="trackerboard quest">
+          {this.createQuestTrackerBoard()}
         </div>
-        <div className="GameBoard-VoteTrackerBoard">
+        <div className="trackerboard vote">
           {this.createVoteTrackerBoard()}
         </div>
       </div>

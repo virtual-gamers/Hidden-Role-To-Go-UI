@@ -18,8 +18,8 @@ function VoteTracker(props) {
   } = props;
 
   return (
-    <div className="VoteTracker" id={`VoteTracker-${id}`}>
-      <img src={getTrackerImg(isFailed)} className="VoteTrackerImage" alt="vote tracker" />
+    <div className="votetracker" id={`VoteTracker-${id}`}>
+      <img src={getTrackerImg(isFailed)} className="votetracker-image" alt="vote tracker" />
       {/* <div>{`Vote ${id}`}</div> */}
     </div>
   );

@@ -6,14 +6,14 @@ import storeBuilder from '../store';
 import '../../assets/stylesheets/App.css';
 
 import HiddenRole from './HiddenRole';
-import GameBoard from './Avalon/GameBoard';
+import RoleSelect from './Avalon/RoleSelect';
 
 function App() {
   return (
     <Provider store={storeBuilder()}>
       <div className="App">
         {/* <HiddenRole /> */}
-        <GameBoard />
+        <RoleSelect />
       </div>
     </Provider>
   );
