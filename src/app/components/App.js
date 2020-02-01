@@ -13,7 +13,7 @@ function App() {
     <Provider store={storeBuilder()}>
       <div className="App">
         {/* <HiddenRole /> */}
-        <GameBoard missions={5} />
+        <GameBoard />
       </div>
     </Provider>
   );

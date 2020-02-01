@@ -1,52 +1,77 @@
-.GameBoard {
-  width: 100vw;
-  padding: 0rem 1vh;
-  flex-direction: column;
-  justify-content: space-between;
-  text-align: center;
-}
-
-.GameBoard-Missions {
-  display: inline-flex;
-  flex-direction: row;
-  margin: 0rem auto;
-  text-align: center;
-}
-
 @media screen and (orientation:portrait) {
-  .GameBoard-Missions {
+  .GameBoard-Quests {
     width: 100%;
+  }
+  
+  .GameBoard-VoteTrackerBoard {
+    padding-left: 0.75rem;
   }
 }
 
 @media screen and (orientation:landscape) {
-  .GameBoard-Missions {
-    width: 75%;
+  .GameBoard-Quests {
+    width: 50%;
   }
   
-  .MissionLogo {
-    margin: 0rem 0.5rem;
+  .GameBoard-VoteTrackerBoard {
+    padding-left: 0.4rem;
   }
 }
 
-.MissionMarker {
+.GameBoard {
+  height: 9rem;
+  width: 100%;
+  padding: 0.5rem 0rem 1rem; /* top | left/right | bottom */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  border-bottom: 2px solid black;
+}
+
+.GameBoard-Quests {
+  display: inline-flex;
+  flex-direction: row;
+  margin-right: auto;
+  text-align: center;
+}
+
+.QuestMarker {
   padding: 0.25rem;
   text-align: center;
   margin: 0rem auto;
 }
 
-.MissionLogo {
-  width: 4.5rem;
+.QuestMarkerImage {
+  width: 3.5rem;
+  pointer-events: none;
+}
+
+.GameBoard-VoteTrackerBoard {
+  display: inline-flex;
+  flex-direction: row;
+  margin-right: auto;
+  text-align: center;
+}
+
+.VoteTracker {
+  padding: 0.1rem;
+  text-align: center;
+  margin: 0rem auto;
+}
+
+.VoteTrackerImage {
+  width: 2.5rem;
   pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .MissionLogo {
-    animation: MissionLogo-spin infinite 20s linear;
+  .QuestMarkerImage {
+    animation: QuestMarkerImage-spin infinite 20s linear;
   }
 }
 
-@keyframes MissionLogo-spin {
+@keyframes QuestMarkerImage-spin {
   from {
     transform: rotate(0deg);
   }
