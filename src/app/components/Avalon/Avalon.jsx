@@ -7,7 +7,7 @@ import GameBoard from './GameBoard';
 import { setNumPlayers } from '../../actions';
 
 // TODO: translate quests to players via service request
-// Setting this to 5 for now, as that's the max # of missions
+// Setting this to # of quests for now
 const MAX_PLAYERS = "5";
 
 class GameSelect extends Component {
@@ -59,7 +59,7 @@ class GameSelect extends Component {
     const { numPlayers } = this.props;
     
     if (numPlayers) {
-      return <GameBoard missions={numPlayers} />
+      return <GameBoard />
     }
     return (this.selectPlayers());
   }

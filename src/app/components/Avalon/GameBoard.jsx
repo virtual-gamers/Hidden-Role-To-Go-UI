@@ -1,33 +1,55 @@
 import React, { Component } from 'react';
 
-import MissionMarker from './MissionMarker';
+import QuestMarker from './QuestMarker';
+import VoteTracker from './VoteTracker';
 import '../../../assets/stylesheets/Avalon/GameBoard.css';
 
-class GameBoard extends Component {
-  createMissions = () => {
-    const { missions } = this.props;
+const QUESTS = 5;
+const VOTE_TRACKER = 5;
 
-    let missionMarkers = [];
+class GameBoard extends Component {
+  createQuests = () => {
+    let questMarkers = [];
     let dummyState = ["PASSED", "FAILED", 'FAILED', '', '']
 
-    for (let i = 1; i <= missions; i++) {
-      missionMarkers.push(
-        <MissionMarker
+    for (let i = 1; i <= QUESTS; i++) {
+      questMarkers.push(
+        <QuestMarker
           id={i}
-          key={`MissionMarker-${i}`}
-          missionState={dummyState[i-1]}
+          key={`QuestMarker-${i}`}
+          questState={dummyState[i-1]}
         />
       );
     }
 
-    return missionMarkers;
+    return questMarkers;
+  }
+  
+  createVoteTrackerBoard = () => {
+    let voteTracker = [];
+    let dummyVotesFailed = 3;
+
+    for (let i = 1; i <= VOTE_TRACKER; i++) {
+      voteTracker.push(
+        <VoteTracker
+          id={i}
+          key={`VoteTracker-${i}`}
+          isFailed={i < dummyVotesFailed}
+        />
+      );
+    }
+
+    return voteTracker;
   }
 
   render() {
     return (
       <div className="GameBoard">
-        <div className="GameBoard-Missions">
-          {this.createMissions()}
+        <div className="GameBoard-Quests">
+          {this.createQuests()}
+        </div>
+        <div className="GameBoard-VoteTrackerBoard">
+          {this.createVoteTrackerBoard()}
         </div>
       </div>
     );
