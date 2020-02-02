@@ -1,70 +1,107 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import '../../../assets/stylesheets/select.css';
+import '../../../assets/stylesheets/Avalon/RoleSelect.css';
 import GameBoard from './GameBoard';
 
 import { selectRoles } from '../../actions';
 
-const players = 5;
+const players = 2;
+const dummySelectableRoles = [{ name: 'Merlin' }, { name: 'Morgana' }, { name: 'Generic_Good' }, { name: 'Generic_Bad1' }, { name: 'Generic_Bad2' }, { name: 'Generic_Bad3' }, { name: 'Generic_Bad4' }]
+const dummyCurrSelectedRoles = dummySelectableRoles.slice(0, players)
 
 class RoleSelect extends Component {
-  handleSubmit(event) {
-    event.preventDefault()
-    
-    const form = document.querySelector('#playersForm');
-    const input = document.querySelector('#playersInput');
+  constructor(props) {
+    super(props);
+    this.state = {
+      inError: false
+    }
+  }
+  currSelectedRoles = dummyCurrSelectedRoles;
 
-    if (form.checkValidity() === false) {
-      event.stopPropagation()
+  toggleRole(event, role) {
+    const roleClasses = event.target.classList;
+    const isSelected = 'role-selected';
+    if (!roleClasses.contains(isSelected)) {
+      this.currSelectedRoles.push(role);
     } else {
-      const { selectRoles } = this.props;
-      selectRoles(input.value);
+      const idx = this.currSelectedRoles.indexOf(role);
+      this.currSelectedRoles.splice(idx, 1);
+    }
+    
+    roleClasses.toggle(isSelected)
+    
+    console.log(this.currSelectedRoles);
+
+    
+    if (this.currSelectedRoles.length === players) {
+      this.setState({inError: false})
+    } else {
+      this.setState({inError: true});
     }
   }
 
-  selectRoles() {
+  createRoles(selectableRoles) {
+    const selectableRoleImages = [];
+
+    selectableRoles.forEach((role) => {
+      const isSelected = this.currSelectedRoles.indexOf(role) !== -1 ? ' role-selected' : '';
+      selectableRoleImages.push(
+        <label
+          id={role.name}
+          key={role.name}
+          className={'role' + isSelected}
+          style={{ backgroundColor: 'blue' }}
+          onClick={(e) => this.toggleRole(e, role)}
+        />
+      );
+    });
+
+    return selectableRoleImages;
+  }
+
+  handleSubmit() {
+    if (this.currSelectedRoles.length === players) {
+      const { selectRoles } = this.props;
+      selectRoles(this.currSelectedRoles);
+    }
+  }
+
+  renderError() {
+    if (this.state.inError) {
+      return <div className="role-error">{`Please select ${players} roles`}</div>;
+    } else {
+      return undefined;
+    }
+  }
+
+  createRoleBoard(selectableRoles) {
     return (
-      <div className="vertical-select">
+      <div className="roleboard">
         <h3>Select Roles</h3>
-        <form id="playersForm" className="container was-validated" noValidate="">
-          <div className="form-group">
-            <input
-              id="playersInput"
-              className="form-control form-control-lg"
-              type="number" // android and some browsers. enforces number keypad but also floating points
-              min="1" // works with type to enforce positive numbers
-              max={players} // works with type to prevent overflow
-              step="1" // works with type to enforce integers
-              pattern="[0-9]*" // iOS. enforces number keypad + submission, not allowed characters
-              inputMode="numeric" // some extra other browsers probably
-              placeholder="Players"
-              required
-              onKeyPress={(e) => e.which === 13 ? this.handleSubmit(e) : null} // key 13 is the enter key
-            />
-            <div className="invalid-feedback">{`Must be a positive integer between 1 and ${players}.`}</div>
-          </div>
-          <div>
-            <button type="button" className="btn btn-lg btn-outline-dark" onClick={(e) => this.handleSubmit(e)} >
-              Submit
-            </button>
-          </div>
-        </form>
+        <div>
+          {this.createRoles(selectableRoles)}
+          {this.renderError()}
+        </div>
+        <div>
+          <button type="button" disabled={this.state.inError} className="btn btn-lg btn-outline-dark" onClick={() => this.handleSubmit()} >
+            Submit
+          </button>
+        </div>
       </div>
     );
   }
   render() {
-    const { selectedRoles } = this.props;
-    
-    if (selectedRoles) {
+    const { selectableRoles, selectedRoles } = this.props;
+    if (selectedRoles.length) {
       return <GameBoard />;
     }
-    return (this.selectRoles(selectedRoles));
+    return (this.createRoleBoard(dummySelectableRoles));
   }
 }
 
 const mapStateToProps = (state) => ({
-  roles: state.roles
+  selectedRoles: state.selectedRoles
 });
 
 const mapDispatchToProps = (dispatch) => ({

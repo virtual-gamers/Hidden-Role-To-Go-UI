@@ -8,6 +8,7 @@ const reducers = (state = {
   // default state
   selectedGame: undefined,
   numPlayers: undefined,
+  selectableRoles: undefined,
   selectedRoles: [],
 }, action) => {
   switch (action.type) {
@@ -22,6 +23,7 @@ const reducers = (state = {
         numPlayers: action.numPlayers,
       }
     case SELECT_ROLES:
+      console.log(action.roles);
       return {
         ...state,
         selectedRoles: action.roles,
