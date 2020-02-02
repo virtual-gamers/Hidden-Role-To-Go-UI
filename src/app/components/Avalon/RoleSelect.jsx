@@ -31,9 +31,6 @@ class RoleSelect extends Component {
     
     roleClasses.toggle(isSelected)
     
-    console.log(this.currSelectedRoles);
-
-    
     if (this.currSelectedRoles.length === players) {
       this.setState({inError: false})
     } else {
@@ -68,11 +65,13 @@ class RoleSelect extends Component {
   }
 
   renderError() {
+    let isValid;
     if (this.state.inError) {
-      return <div className="role-error">{`Please select ${players} roles`}</div>;
+      isValid = '';
     } else {
-      return undefined;
+      isValid = ' is-valid';
     }
+    return <div className={"role-error" + isValid}>{`Please select ${players} roles`}</div>;
   }
 
   createRoleBoard(selectableRoles) {
@@ -91,6 +90,7 @@ class RoleSelect extends Component {
       </div>
     );
   }
+
   render() {
     const { selectableRoles, selectedRoles } = this.props;
     if (selectedRoles.length) {

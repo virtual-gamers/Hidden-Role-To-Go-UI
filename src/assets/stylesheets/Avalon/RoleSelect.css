@@ -23,6 +23,11 @@
 .role-error {
   color: red;
   font-size: 1rem;
+  visibility: visible;
+}
+
+.is-valid {
+  visibility: hidden;
 }
 
 .btn {
